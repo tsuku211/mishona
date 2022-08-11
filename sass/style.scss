@@ -1,20 +1,16 @@
 @charset "UTF-8";
 
-//マップ型変数breakpointsを定義
 $breakpoints: (
-//キー　　値
-  'sm': 'screen and (max-width: 600px)', //767px以下（スマホ）用の表示
+  'sm': 'screen and (max-width: 600px)',
   'md': 'screen and (max-width: 768px)',
-  'lg': 'screen and (max-width: 990px)', //768px以上（タブレット・PC）用の表示
+  'lg': 'screen and (max-width: 860px)',
   'max': 'screen and (max-width: 1005px)',
-  'enormous': 'screen and (max-width: 1360px)'
+  'enormous': 'screen and (max-width: 1224px)'
 ) !default;
 
-//メディアクエリ用のmixinを定義。デフォ値はsp
+
 @mixin mq($breakpoint: sp) {
-//map-get(マップ型変数, キー)で値を取得
   @media #{map-get($breakpoints, $breakpoint)} {
-    //この中をカスタムできる
     @content;
   }
 }
@@ -25,6 +21,7 @@ $breakpoints: (
 	@return $size * $rate * 1vw;
 }
 
+//フォント
 @font-face {
   font-family: myFirstFont;
   src: url(../font/genshinMedium.woff2);
@@ -64,7 +61,7 @@ body {
 }
 
 .inner {
-  max-width: 990px;
+  max-width: 850px;
   margin: 0 auto;
   padding: 0 10px;
   box-sizing: content-box;
@@ -204,23 +201,107 @@ body {
     max-width: 1100px;
     margin: 0 auto;
   }
-  .fv a {
+  .fv .pc-btn {
     position: absolute;
-    bottom: 8.5%;
+    bottom: 8%;
     left: 50%;
-    display: inline-block;
-    width: 58%;
+    display: block;
+    width: 61%;
+    padding: min(32px, Vw(32, 1100)) 0;
+    border-radius: 80px;
+    color: #fff;
+    background-color: #FD4D00;
+    font-size: min(48px, Vw(48, 1100));
+    text-align: center;
     transform: translateX(-50%);
+    transition: all 0.3s;
     @include mq(md) {
-      bottom: 6.5%;
-      width: 95%;
+      display: none;
+    }
+
+    span {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: max(-35px, Vw(-35, 1100));
+        width: min(25px, Vw(25, 1100));
+        height: min(25px, Vw(25, 1100));
+        border-top: min(6px, Vw(6, 1100)) solid #fff;
+        border-right: min(6px, Vw(6, 1100)) solid #fff;
+        transform: translateY(-65%) rotate(45deg);
+      }
+    }
+
+    em {
+      font-size: min(60px, Vw(60, 1100));
+      font-style: normal;
+    }
+
+    &:hover {
+      background-color: #fff;
+      color: #FD4D00;
     }
   }
-  .fv a:hover {
-    opacity: 0.7;
+
+  .fv .sp-btn {
+    display: none;
+    position: absolute;
+    bottom: 6.5%;
+    left: 50%;
+    width: 95%;
+    padding: Vw(15, 768) 0;
+    border-radius: 80px;
+    color: #fff;
+    background-color: #FD4D00;
+    font-size: Vw(50, 768);
+    text-align: center;
+    transform: translateX(-50%);
+    transition: all 0.3s;
+    @include mq(md) {
+      display: block;
+    }
+
+    &:hover {
+      background-color: #fff;
+      color: #FD4D00;
+    }
+
+    em {
+      font-size: Vw(45, 768);
+      font-style: normal;
+    }
+
+    span {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: Vw(-210, 768);
+        width: Vw(30, 768);
+        height: Vw(30, 768);
+        border-top: min(8px, Vw(8, 768)) solid #fff;
+        border-right: min(8px, Vw(8, 768)) solid #fff;
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      span {
+        display: inline-block;
+        color: #fff600;
+        font-size: Vw(33, 768);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
   }
 
-  .fv span {
+  .fv .fv-text {
     display: none;
     position: absolute;
     bottom: 2%;
@@ -240,14 +321,14 @@ body {
     position: absolute;
     width: 14%;
     bottom: 11%;
-    left: 0;
+    left: -15px;
     transform: translateX(100px);
     @include mq(md) {
       display: none;
     }
   }
 
-//ハンバーガーメニューはじまるよ！
+//ハンバーガーメニュー
 .drawer-icon {
   position: fixed;
   top: 15px;
@@ -375,7 +456,7 @@ body {
     }
   }
 }
-//ハンバーガーメニューここまでだよ！
+//ハンバーガーメニュー
   
 
   .feature {
@@ -385,7 +466,7 @@ body {
 
   .feature-title {
     color: #fff;
-    font-size: 45px;
+    font-size: 40px;
     text-align: center;
     @include mq(sm) {
       font-size: max(Vw(45, 600), 30px);
@@ -419,7 +500,7 @@ body {
 
   .feature-item {
     position: relative;
-    width: 215px;
+    width: 200px;
     padding: 80px 10px 30px;
     background-color: #fff;
     border-radius: 20px;
@@ -472,7 +553,7 @@ body {
 
   .feature-subtitle {
     color: #08bf5a;
-    font-size: 27px;
+    font-size: 25px;
     font-weight: bold;
     text-align: center;
     @include mq(sm) {
@@ -482,7 +563,7 @@ body {
 
   .feature-text {
     margin-top: 22px;
-    font-size: 25px;
+    font-size: 22px;
     text-align: center;
     @include mq(sm) {
       margin-top: Vw(22, 600);
@@ -493,7 +574,7 @@ body {
   .worry {
     position: relative;
     padding-top: 60px;
-    padding-bottom: (730px / 2);
+    padding-bottom: 320px;
     background: url(../img/worry-bg.png) no-repeat center bottom / cover;
     @include mq(md) {
       padding-bottom: 280px;
@@ -506,10 +587,10 @@ body {
     &::after {
       content: "";
       position: absolute;
-      bottom: -40px;
+      bottom: -60px;
       left: 50%;
-      width: (412px / 2);
-      height: (704px / 2);
+      width: 190px;
+      height: 320px;
       background: url(../img/about-man.png) no-repeat center center / contain;
       transform: translateX(-50%);
       @include mq(md) {
@@ -525,13 +606,13 @@ body {
 
   .worry-title {
     padding-right: 200px;
-    font-size: 45px;
+    font-size: 40px;
     line-height: 90px;
     font-weight: bold;
     text-align: center;
     @include mq(lg) {
       padding-right: 270px;
-      font-size: 40px;
+      font-size: 37px;
     }
     @include mq(md) {
       padding-right: 160px;
@@ -594,8 +675,8 @@ body {
 
   .worry-listWrap {
     position: relative;
-    padding-left: 50px;
-    padding-bottom: 50px;
+    padding-left: 40px;
+    padding-bottom: 40px;
     font-weight: 600;
     z-index: 3;
     @include mq(md) {
@@ -606,7 +687,7 @@ body {
     }
 
     &:not(:first-child) {
-      margin-top: 100px;
+      margin-top: 80px;
     }
 
     &::before {
@@ -624,7 +705,7 @@ body {
         content: "";
         position: absolute;
         top: -290px;
-        right: 20px;
+        right: -30px;
         width: 205px;
         height: 365px;
         background: url(../img/worry-man.png) no-repeat center center / contain;
@@ -663,18 +744,21 @@ body {
       color: #fff;
       font-size: 40px;
       transform: rotate(-1deg);
+      @include mq(lg) {
+        font-size: 37px;
+      }
       @include mq(sm) {
         font-size: 30px;
       }
     }
 
     ul {
-      margin-top: 40px;
+      margin-top: 35px;
 
       li {
         position: relative;
         padding-left: 58px;
-        font-size: 27px;
+        font-size: 25px;
         @include mq(md) {
           padding-left: 40px;
           font-size: 22px;
@@ -704,10 +788,10 @@ body {
   }
 
   .worry-text {
-    margin-top: 67px;
-    font-size: 50px;
+    margin-top: 60px;
+    font-size: 47px;
     font-weight: 600;
-    line-height: 90px;
+    line-height: 83px;
     text-align: center;
     @include mq(sm) {
       margin-top: Vw(70, 600);
@@ -717,7 +801,7 @@ body {
 
     .ac-color {
         color: #fd4d00;
-        font-size: 60px;
+        font-size: 57px;
         @include mq(sm) {
           font-size: Vw(60, 600);
         }
@@ -726,18 +810,19 @@ body {
 
   .what {
     padding-top: 90px;
-    padding-bottom: 100px;
+    padding-bottom: 80px;
     @include mq(md) {
       padding-top: 180px;
     }
     @include mq(sm) {
       padding-top: 80px;
+      padding-bottom: 40px;
     }
   }
 
   .what-title {
     color: #08bf5a;
-    font-size: 80px;
+    font-size: 75px;
     font-weight: 600;
     text-align: center;
     @include mq(lg) {
@@ -759,8 +844,8 @@ body {
   }
 
   .what-text {
-    font-size: 25px;
-    line-height: 45px;
+    font-size: 24px;
+    line-height: 43px;
     text-align: center;
     @include mq(sm) {
       font-size: 20px;
@@ -804,15 +889,32 @@ body {
   }
 
 .reason {
-  padding: 240px 0 27vw;
-  background: url(../img/reason-bg.png) no-repeat top center / cover;
+  position: relative;
+  padding: 240px 0 50px;
+  background: linear-gradient(to bottom, transparent, #e9ffef), url(../img/reason-bg.png) no-repeat top center / cover;
   @include mq(md) {
     padding-top: 190px;
     background: url(../img/reason-bg_sp.png) no-repeat top center / cover;
   }
   @include mq(sm) {
     padding-top: Vw(190, 600);
+    padding-bottom: 30px;
   }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    box-sizing: border-box;
+    border-right: calc(50vw - 15px) solid transparent;
+    border-left: calc(50vw - 15px) solid transparent;
+    border-top: 100px solid #e9ffef;
+    transform: translateX(-50%);
+    @include mq(sm) {
+      border-top: 50px solid #e9ffef;
+    }
+  } 
 }
   
 .reason-title {
@@ -851,13 +953,35 @@ body {
   @include mq(sm) {
     margin-top: Vw(70, 600);
   }
+
+  &.reason-topList_pc {
+    @include mq(md) {
+      display: none;
+    }
+  }
+
+  &.reason-topList_sp {
+    display: none;
+    @include mq(md) {
+      display: block;
+    }
+
+    //アコーディオンが開いた時に矢印を上にする
+    .is-active {
+      p {
+        &::after {
+          transform: translateY(-50%) rotate(180deg);
+        }
+      }
+    }
+  }
 }
 
 .reason-topItem {
-  width: 300px;
-  font-size: 25px;
+  width: 260px;
+  font-size: 22px;
   font-family: myFirstFont;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
   @include mq(lg) {
     width: 32%;
@@ -887,13 +1011,13 @@ body {
   }
 
   dd {
-    margin-top: 13px;
+    margin-top: 10px;
 
     p {
-      padding: 20px 0;
+      padding: 16px 0;
       border-radius: 20px 20px 0 0;
       background-color: #fff;
-      line-height: 35px;
+      line-height: 32px;
       @include mq(md) {
         position: relative;
         padding-right: 45px;
@@ -1027,11 +1151,38 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 }
 
+.reason-child {
+
+  p {
+    padding: 18px;
+    margin-top: 22px;
+    background-color: #fff;
+    border-radius: 20px;
+    font-size: 23px;
+    line-height: 35px;
+    text-align: left;
+    @include mq(sm) {
+      padding: Vw(18,600);
+      margin-top: Vw(22, 600);
+      font-size: Vw(25, 600);
+      line-height: Vw(35, 600);
+    }
+  }
+}
+
+.reason-img {
+  width: 190px;
+  margin: 20px auto 0;
+  @include mq(sm) {
+    width: 150px;
+  }
+}
+
 .reason-bottomText {
   position: relative;
   width: calc(100% - 190px);
-  padding-top: 50px;
-  padding-left: 140px;
+  padding-top: 35px;
+  padding-left: 110px;
   @include mq(md) {
     display: contents;
   }
@@ -1041,15 +1192,15 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
     position: absolute;
     top: 0;
     left: 0;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     @include mq(md) {
       display: none;
     }
   }
 
   h4 {
-    font-size: 35px;
+    font-size: 32px;
     font-family: myFirstFont;
     font-weight: 600;
     @include mq(md) {
@@ -1083,7 +1234,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
     margin-top: 22px;
     background-color: #fff;
     border-radius: 20px;
-    font-size: 25px;
+    font-size: 23px;
     line-height: 35px;
     @include mq(md) {
       order: 1;
@@ -1097,27 +1248,23 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 }
 
-.reason-img {
-  width: 190px;
-  @include mq(md) {
-    margin-top: 60px;
-  }
+.result {
+  padding-top: 100px;
   @include mq(sm) {
-    width: 150px;
-    margin-top: 50px;
+    padding-top: 70px;
   }
 }
 
 .result-topText {
-  margin-top: 70px;
+  margin-top: 50px;
   @include mq(sm) {
-    margin-top: Vw(70, 600);
+    margin-top: 0;
   }
 
   h2 {
-    font-size: 45px;
+    font-size: 43px;
     font-weight: 600;
-    line-height: 85px;
+    line-height: 80px;
     text-align: center;
     @include mq(md) {
       font-size: 40px;
@@ -1130,7 +1277,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
     strong {
       color: #08bf5a;
-      font-size: 60px;
+      font-size: 57px;
       font-weight: 600;
       @include mq(md) {
         font-size: 50px;
@@ -1142,8 +1289,8 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 
   p {
-    margin-top: 40px;
-    font-size: 35px;
+    margin-top: 35px;
+    font-size: 32px;
     line-height: 40px;
     @include mq(md) {
       font-size: 25px;
@@ -1172,10 +1319,10 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 
   p {
-    margin-top: 85px;
+    margin-top: 70px;
     color: #fff;
-    font-size: 55px;
-    line-height: 80px;
+    font-size: 52px;
+    line-height: 78px;
     @include mq(md) {
       margin-top: 50px;
       font-size: 43px;
@@ -1203,7 +1350,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  max-width: 1350px;
+  max-width: 1200px;
   margin: 0 auto;
   @include mq(md) {
     display: none;
@@ -1211,31 +1358,28 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
   li {
     position: relative;
-    width: 320px;
-    padding: 25px 20px;
+    width: 290px;
+    padding: 22px 17px;
     background-color: #fff;
     border-radius: 20px;
-    font-size: 25px;
-    line-height: 32px;
+    font-size: 23px;
+    line-height: 30px;
     text-align: left;
     @include mq(enormous) {
-      width: 23vw;
-      padding: Vw(25, 1360) Vw(20, 1360);
-      font-size: Vw(25, 1360);
-      line-height: Vw(32, 1360);
+      width: Vw(280, 1224);
+      padding: Vw(22, 1224) Vw(17, 1224);
+      font-size: Vw(23, 1224);
+      line-height: Vw(30, 1224);
     }
 
     &:nth-of-type(n + 6):nth-of-type(-n + 7) {
       background-color: transparent;
-      @include mq(md) {
-        display: none;
-      }
     }
 
     &:nth-child(n + 5) {
-      margin-top: 25px;
+      margin-top: 20px;
       @include mq(enormous) {
-        margin-top: Vw(25, 1360);
+        margin-top: Vw(20, 1224);
       }
     }
 
@@ -1245,14 +1389,14 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
         position: absolute;
         left: 50px;
         bottom: -160px;
-        width: (486px / 2);
+        width: 220px;
         height: (815px / 2);
         background: url(../img/result-man.png) no-repeat center center / contain;
         @include mq(enormous) {
-          bottom: Vw(-160, 1360);
-          left: Vw(50, 1360);
-          width: Vw(243, 1360);
-          height: Vw(407, 1360);
+          left: Vw(20, 1224);
+          bottom: Vw(-160, 1224);
+          width: Vw(220, 1224);
+          height: Vw(407, 1224);
         }
       }
     }
@@ -1264,18 +1408,18 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
         position: absolute;
         right: 0;
         top: 50%;
-        width: 328px;
-        height: (292px / 2);
+        width: 298px;
+        height: 136px;
         color: #fff;
-        font-size: (110px /2);
+        font-size: 50px;
         font-weight: 600;
-        line-height: 80px;
+        line-height: 70px;
         transform: translateY(-50%);
         @include mq(enormous) {
-          width: Vw(328, 1360);
-          height: Vw(146, 1360);
-          font-size: 4vw;
-          line-height: Vw(80, 1360);
+          width: Vw(290, 1224);
+          height: Vw(136, 1224);
+          font-size: Vw(49, 1224);
+          line-height: Vw(70, 1224);
         }
       }
     }
@@ -1308,7 +1452,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 }
 
 .step-title {
-  font-size: 45px;
+  font-size: 42px;
   text-align: center;
   @include mq(lg) {
     font-size: Vw(45, 990);
@@ -1324,7 +1468,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
   em {
     color: #08bf5a;
-    font-size: 60px;
+    font-size: 57px;
     font-style: normal;
     @include mq(lg) {
       font-size: Vw(60, 990);
@@ -1348,27 +1492,27 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 }
 
 %step_h3 {
-  width: 218px;
+    width: 200px;
     padding: 5px 0;
     margin: 0 auto;
     border-radius: 70px;
     background-color: #08bf5a;
     color: #fff;
-    font-size: 30px;
+    font-size: 27px;
     text-align: center;
 
     span {
       display: inline-block;
       margin-left: 10px;
-      font-size: 45px;
+      font-size: 40px;
     }
 }
 
 %p_first-of-type {
-  margin-top: 35px;
+  margin-top: 30px;
   color: #08bf5a;
-  font-size: 30px;
-  line-height: 37px;
+  font-size: 27px;
+  line-height: 35px;
   font-weight: bold;
   text-align: center;
 
@@ -1378,21 +1522,16 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 }
 
 %p_last-of-type {
-  margin-top: 32px;
-  font-size: 25px;
-  line-height: 35px;
+  margin-top: 20px;
+  font-size: 22px;
+  line-height: 32px;
 }
 
 .step-item {
-  width: 300px;
-  @include mq(lg) {
-    width: calc(100% / 3 - 20px * 2 / 3)
-  }
+  width: calc(100% / 3 - 20px * 2 / 3);
 
   &:not(:first-child) {
-    @include mq(lg) {
       margin-left: 20px;
-    }
   }
 
   h3 {
@@ -1401,15 +1540,12 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
   figure {
     width: 100%;
-    margin-top: 60px;
+    margin-top: 50px;
   }
 
   p:first-of-type {
     @extend %p_first-of-type;
     @include mq(lg) {
-      margin-top: 30px;
-      font-size: 27px;
-      line-height: 34px;
 
       em {
 
@@ -1425,11 +1561,6 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
   p:last-of-type {
     @extend %p_last-of-type;
-    @include mq(lg) {
-      margin-top: 30px;
-      font-size: 22px;
-      line-height: 32px;
-    }
   }
 }
 
@@ -1526,7 +1657,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   padding: 42px 0 72px;
   background-color: #08bf5a;
 
-  span {
+  .cta-text {
     display: block;
     color: #fff;
     font-size: 27px;
@@ -1572,7 +1703,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
     position: absolute;
     top: -30px;
     left: 0;
-    width: (345px / 2);
+    width: 150px;
     @include mq(lg) {
       display: none;
     }
@@ -1581,15 +1712,56 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   a {
     display: inline-block;
     width: (1445px / 2);
+    padding: 32px 0;
     margin-top: 25px;
-    @include mq(lg) {
-      width: 680px;
-    }
+    border-radius: 80px;
+    color: #fff;
+    background-color: #FD4D00;
+    font-size: 48px;
+    text-align: center;
+    transition: all 0.3s;
     @include mq(md) {
       width: 100%;
+      padding: Vw(32, 768) 0;
+      margin-top: Vw(25, 768);
+      font-size: Vw(48, 768);
     }
-    @include mq(sm) {
-      margin-top: Vw(25,600);
+
+    em {
+      font-size: 60px;
+      font-weight: 600;
+      font-style: normal;
+      @include mq(md) {
+        font-size: Vw(60, 768);
+      }
+    }
+
+    span {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -50px;
+        width: 25px;
+        height: 25px;
+        border-top: 6px solid #fff;
+        border-right: 6px solid #fff;
+        transform: translateY(-65%) rotate(45deg);
+        @include mq(md) {
+          right: Vw(-50, 768);
+          width: Vw(25, 768);
+          height: Vw(25, 768);
+          border-top: Vw(6, 768) solid #fff;
+          border-right: Vw(6, 768) solid #fff;
+        }
+      }
+    }
+
+    &:hover {
+      background-color: #fff;
+      color: #FD4D00;
     }
   }
 }
@@ -1601,7 +1773,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
     padding-top: 60px;
   }
   @include mq(sm) {
-    padding-bottom: Vw(132, 600);
+    padding-bottom: Vw(132, 600)f;
   }
 }
 
@@ -1778,8 +1950,8 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
   p {
     margin-top: 25px;
-    font-size: 25px;
-    line-height: 35px;
+    font-size: 23px;
+    line-height: 32px;
     @include mq(sm) {
       font-size: 20px;
       line-height: 30px;
@@ -1824,7 +1996,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 }
 
 .function-bottomText {
-  margin-top: (150px / 2);
+  margin-top: 60px;
   font-weight: 600;
   text-align: center;
   @include mq(sm) {
@@ -1832,8 +2004,8 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 
   p:first-child {
-    font-size: 40px;
-    line-height: 80px;
+    font-size: 34px;
+    line-height: 70px;
     @include mq(md) {
       font-size: 25px;
       line-height: 50px;
@@ -1845,9 +2017,9 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 
   p:nth-child(2) {
-    margin-top: 75px;
-    font-size: 45px;
-    line-height: 80px;
+    margin-top: 60px;
+    font-size: 42px;
+    line-height: 74px;
     @include mq(md) {
       margin-top: 65px;
       font-size: 28px;
@@ -1865,9 +2037,9 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 
   p:last-child {
-    margin-top: 75px;
-    font-size: 25px;
-    line-height: 35px;
+    margin-top: 60px;
+    font-size: 22px;
+    line-height: 32px;
     @include mq(md) {
       font-size: 20px;
       line-height: 30px;
@@ -1880,12 +2052,9 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
     span {
       display: inline-block;
-      margin-top: 40px;
-      @include mq(md) {
-        margin-top: 35px;
-      }
+      margin-top: 30px;
       @include mq(sm) {
-        margin-top: Vw(35, 600);
+        margin-top: Vw(30, 600);
       }
     }
 
@@ -1908,7 +2077,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 
   p:first-child {
-    font-size: 45px;
+    font-size: 42px;
     @include mq(md) {
       font-size: 35px;
     }
@@ -1918,10 +2087,10 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 
   p:last-child {
-    margin-top: 42px;
+    margin-top: 35px;
     color: #08bf5a;
-    font-size: 60px;
-    line-height: 100px;
+    font-size: 55px;
+    line-height: 80px;
     @include mq(md) {
       margin-top: 15px;
       font-size: 50px;
@@ -1936,7 +2105,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 }
 
 .cta02 {
-  padding: 245px 0 175px;
+  padding: 200px 0 70px;
   margin-top: -150px;
   background-color: #e9ffef;
   @include mq(md) {
@@ -1970,6 +2139,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 .plan-title {
   font-size: 45px;
   font-weight: 600;
+  text-align: center;
   @include mq(md) {
     font-size: 40px;
     text-align: center;
@@ -1980,14 +2150,14 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 }
 
 .attention-list {
-  margin-top: 50px;
+  margin-top: 40px;
   @include mq(md) {
     margin-top: 30px;
   }
 
   li {
-    font-size: 25px;
-    font-weight: 600;
+    font-size: 22px;
+    font-weight: normal;
     @include mq(md) {
       font-size: 16px;
     }
@@ -2000,7 +2170,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
 .plan-bottomText {
   display: flex;
-  margin-top: 115px;
+  margin-top: 70px;
   @include mq(md) {
     margin-top: 80px;
   }
@@ -2011,7 +2181,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
   p {
     width: calc(100% - (329px / 2));
-    font-size: 45px;
+    font-size: 40px;
     line-height: 70px;
     font-weight: 600;
     text-align: center;
@@ -2071,9 +2241,9 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
 .plan-subtitle {
   color: #08bf5a;
-  font-size: 60px;
+  font-size: 45px;
   font-weight: 600;
-  line-height: 100px;
+  line-height: 80px;
   text-align: center;
   @include mq(md) {
     font-size: 40px;
@@ -2118,10 +2288,10 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
 .comparison-title {
   color: #08bf5a;
-  font-size: 60px;
+  font-size: 45px;
   text-align: center;
   @include mq(md) {
-    font-size: 50px;
+    font-size: 40px;
   }
   @include mq(sm) {
     font-size: max(29px, Vw(50, 600));
@@ -2141,10 +2311,10 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
 .strengths-title {
   color: #08bf5a;
-  font-size: 60px;
+  font-size: 45px;
   text-align: center;
   @include mq(md) {
-    font-size: 50px;
+    font-size: 40px;
   }
   @include mq(sm) {
     font-size: max(30px, Vw(50, 600));
@@ -2169,8 +2339,8 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
   li {
     position: relative;
-    width: 320px;
-    padding: 54px 25px 100px;
+    width: 280px;
+    padding: 54px 25px 80px;
     @include mq(lg) {
       width: Vw(320,990);
       padding: Vw(54,990) Vw(25,990) Vw(100, 990);
@@ -2184,7 +2354,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
     }
 
     &:nth-child(2) {
-      margin-top: 15px;
+      margin-top: 13px;
       background-color: #fff;
       box-shadow: 0 0 10px 0 #b9d5c6;
       @include mq(lg) {
@@ -2243,7 +2413,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
     h3 {
       position: relative;
       color: #fd4d00;
-      font-size: 40px;
+      font-size: 35px;
       font-weight: 600;
       text-align: center;
       z-index: 3;
@@ -2264,9 +2434,9 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
     p {
       position: relative;
-      margin-top: 44px;
-      font-size: 25px;
-      line-height: 40px;
+      margin-top: 35px;
+      font-size: 22px;
+      line-height: 37px;
       z-index: 3;
       @include mq(lg) {
         margin-top: Vw(44, 990);
@@ -2316,7 +2486,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
 .task-title {
   color: #fff;
-  font-size: 60px;
+  font-size: 45px;
   text-align: center;
   @include mq(md) {
     font-size: 40px;
@@ -2409,7 +2579,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 }
 
 .task-itemContent {
-  height: 400px;
+  height: 410px;
   padding: 23px 24px;
   margin-top: 23px;
   background-color: #fff;
@@ -2422,7 +2592,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
   h3 {
     color: #fd4d00;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 600;
     text-align: center;
     @include mq(sm) {
@@ -2431,8 +2601,8 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 
   p {
-    margin-top: 29px;
-    font-size: 25px;
+    margin-top: 24px;
+    font-size: 22px;
     line-height: 35px;
     text-align: justify;
     @include mq(sm) {
@@ -2444,11 +2614,14 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 }
 
 .task-text {
-  margin-top: 60px;
+  margin-top: 50px;
   color: #fff;
-  font-size: 45px;
-  line-height: 80px;
+  font-size: 40px;
+  line-height: 70px;
   text-align: center;
+  @include mq(lg) {
+    font-size: 37px;
+  }
   @include mq(md) {
     font-size: 30px;
     line-height: 60px;
@@ -2473,14 +2646,10 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 
   p {
     display: inline-block;
-    padding-bottom: 18px;
+    padding-bottom: 12px;
     border-bottom: 3px solid #650a08;
-    font-size: 37px;
+    font-size: 33px;
     letter-spacing: (50em / 1000);
-    @include mq(lg) {
-      font-size: 33px;
-      padding-bottom: 15px;
-    }
     @include mq(md) {
       font-size: 30px;
     }
@@ -2492,16 +2661,11 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   }
 
   h2 {
-    margin-top: 40px;
+    margin-top: 30px;
     color: #08bf5a;
-    font-size: 100px;
-    line-height: 80px;
+    font-size: 90px;
+    line-height: 75px;
     font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
-    @include mq(lg) {
-      margin-top: 37px;
-      font-size: 90px;
-      line-height: 70px;
-    }
     @include mq(md) {
       font-size: 70px;
       line-height: 60px;
@@ -2516,12 +2680,9 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
       position: relative;
       display: inline-block;
       background-color: #e9ffef;
-      font-size: 60px;
+      font-size: 50px;
       font-weight: 600;
       font-family: myFirstFont;
-      @include mq(lg) {
-        font-size: 50px;
-      }
       @include mq(md) {
         font-size: 45px;
       }
@@ -2588,7 +2749,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
       }
 
       &::before {
-        right: calc((100vw - (990px + 15px)) / 2 * -1);
+        right: calc((100vw - (850px + 15px)) / 2 * -1);
       }
 
       &::after {
@@ -2620,7 +2781,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
       }
 
       &::before {
-        left: calc((100vw - (990px + 15px)) / 2 * -1);
+        left: calc((100vw - (850px + 15px)) / 2 * -1);
       }
 
       &::after {
@@ -2651,7 +2812,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
   h3 {
     position: relative;
     padding: (76px / 2) 0;
-    font-size: 40px;
+    font-size: 37px;
     line-height: 50px;
     letter-spacing: (100em / 1000);
     text-align: center;
@@ -2683,6 +2844,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
     position: relative;
     padding: 37px 10px 23px 50px;
     margin-top: 20px;
+    background-color: #fff;
     color: #666666;
     font-size: 18px;
     line-height: 24px;
@@ -2857,7 +3019,7 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
 }
 
 .question-title {
-  font-size: 60px;
+  font-size: 45px;
   text-align: center;
   @include mq(md) {
     font-size: 40px;
@@ -2882,7 +3044,7 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
     background-color: #08bf5a;
     border-radius: 20px;
     color: #fff;
-    font-size: 32px;
+    font-size: 30px;
     font-weight: 600;
     line-height: 45px;
     cursor: pointer;
@@ -2932,9 +3094,9 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
   }
 
   dd {
-    padding: 35px 45px 0 45px;
-    font-size: 27px;
-    line-height: 45px;
+    padding: 20px 45px 0 45px;
+    font-size: 25px;
+    line-height: 42px;
     @include mq(lg) {
       font-size: 24px;
       line-height: 35px;
@@ -3017,6 +3179,7 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
     color: #fd4d00;
     font-size: 30px;
     font-weight: 600;
+    transition: all 0.3s ease 0s;
     @include mq(lg) {
       width: 330px;
     }
@@ -3028,6 +3191,11 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
       padding: Vw(20, 600) 0;
       border-width: Vw(6, 600);
       font-size: Vw(25, 600);
+    }
+
+    &:hover {
+      background-color: #fd4d00;
+      color: #fff;
     }
   }
 }
@@ -3042,11 +3210,11 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
 
 .experience-title {
   color: #fff;
-  font-size: 60px;
+  font-size: 45px;
   font-weight: 600;
   text-align: center;
   @include mq(md) {
-    font-size: 45px;
+    font-size: 40px;
   }
   @include mq(sm) {
     font-size: Vw(45, 600);
@@ -3066,7 +3234,7 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
 }
 
 .experience-left {
-  width: calc(100% - (574px / 2));
+  width: calc(100% - 270px);
   @include mq(md) {
     width: calc(100% - 200px);
   }
@@ -3076,8 +3244,8 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
 
   p {
     color: #fff;
-    font-size: 29px;
-    line-height: 45px;
+    font-size: 26px;
+    line-height: 42px;
     @include mq(md) {
       font-size: 23px;
       line-height: 30px;
@@ -3089,7 +3257,7 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
 
     span {
       display: block;
-      margin-top: 55px;
+      margin-top: 45px;
       @include mq(md) {
         margin-top: 35px;
       }
@@ -3101,7 +3269,7 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
 }
 
 .experience-btn {
-  margin-top: 65px;
+  margin-top: 50px;
   text-align: center;
   @include mq(md) {
     margin-top: 30px;
@@ -3113,13 +3281,14 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
   a {
     display: inline-block;
     width: 550px;
-    padding: 25px 0;
+    padding: 22px 0;
     border-radius: 80px;
     background-color: #fff;
     color: #08bf5a;
-    font-size: 35px;
+    font-size: 32px;
     font-weight: 600;
     box-shadow: 2px 3px 7px -2px rgba(0,0,0,0.6);
+    transition: all 0.3s ease 0s;
     @include mq(lg) {
       width: 500px;
     }
@@ -3131,13 +3300,18 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
       padding: Vw(25, 600) 0;
       font-size: Vw(35, 600);
     }
+
+    &:hover {
+      color: #fff;
+      background-color: #08bf5a;
+    }
   }
 
   em {
     display: inline-block;
-    margin-top: 27px;
+    margin-top: 25px;
     color: #fff600;
-    font-size: 27px;
+    font-size: 25px;
     font-style: normal;
     @include mq(sm) {
       margin-top: Vw(27, 600);
@@ -3147,7 +3321,7 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
 }
 
 .experience-right {
-  width: (574px / 2);
+  width: 270px;
   @include mq(lg) {
     width: 260px;
   }
@@ -3157,14 +3331,10 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
   @include mq(sm) {
     width: Vw(200, 600);
   }
-
-  figure {
-
-  }
 }
 
 .footer {
-  padding: 50px 0;
+  padding: 45px 0;
   @include mq(md) {
     padding: (75px / 2) 0;
   }
@@ -3183,7 +3353,7 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
 
     a {
       position: relative;
-      font-size: 24px;
+      font-size: 22px;
       @include mq(lg) {
         font-size: 20px;
       }
@@ -3192,12 +3362,8 @@ $voiceList: 1 '01', 2 '02', 3 '03', 4 '04', 5 '05', 6 '06', 7 '07';
       }
   
       &:not(:first-child) {
-        padding-left: 20px;
-        margin-left: 20px;
-        @include mq(lg) {
-          padding-left: 15px;
-          margin-left: 15px;
-        }
+        padding-left: 15px;
+        margin-left: 15px;
   
         &::after {
           content: "";

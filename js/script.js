@@ -136,3 +136,14 @@ $('.drawer-content_item a').on('click', function() {
   $('.drawer-icon').removeClass('is-active');
   $('.drawer-content').removeClass('is-active');
 })
+
+//reasonアコーディオン
+//1番目だけ開いている
+$(function () {
+  $('.reason-child').css('display', 'none');         
+  $('.reason-topList_sp dd').on('click', function () {
+    $(this).next().slideToggle();
+    $('.reason-topList_sp dd').not($(this)).next('.reason-child').slideUp();
+    $(this).toggleClass('is-active');
+  })
+});
