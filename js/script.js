@@ -1,21 +1,10 @@
-//hrefに#があるaタグをクリックした時に
 jQuery('a[href^="#"]').on('click', function () {
-  
-    //headerの高さを取得　　//headerが固定の場合必要
     var header = jQuery('.header-top').innerHeight();
-    
-    //hrefの値をidに変換
     var id = jQuery(this).attr('href');
-    
-    //ポジションの初期値は0　//topに戻るボタンがある時のみの記述
     var position = 0;
-    
-    //もしidが#だけじゃなかったらヘッダーの高さを引いた分のidの場所を取得　//topに戻るボタンがないときは、中の記述のみ
     if (id != '#') {
       var position = jQuery(id).offset().top - header;
     }
-    
-    //取得した値に300msでスクロール
     jQuery('html,body').animate(
       {
         scrollTop: position,
@@ -24,7 +13,6 @@ jQuery('a[href^="#"]').on('click', function () {
     );
 });
 
-//1番目だけ開いている
 $(function () {
   $('.ac-child').css('display', 'none');         
   $('.ac-parent').on('click', function () {
@@ -138,7 +126,6 @@ $('.drawer-content_item a').on('click', function() {
 })
 
 //reasonアコーディオン
-//1番目だけ開いている
 $(function () {
   $('.reason-child').css('display', 'none');         
   $('.reason-topList_sp dd').on('click', function () {
