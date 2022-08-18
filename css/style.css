@@ -1,17 +1,17 @@
 @charset "UTF-8";
 @font-face {
-  font-family: myFirstFont;
-  src: url(../font/genshinMedium.woff2);
+  font-family: "myFirstFont";
+  src: url(../font/genshinMedium.woff2) format("woff2");
   font-weight: 400;
 }
 @font-face {
-  font-family: myFirstFont;
-  src: url(../font/genshinBold.woff2);
+  font-family: "myFirstFont";
+  src: url(../font/genshinBold.woff2) format("woff2");
   font-weight: 600;
 }
 @font-face {
-  font-family: myFirstFont;
-  src: url(../font/genshinHeavy.woff2);
+  font-family: "myFirstFont";
+  src: url(../font/genshinHeavy.woff2) format("woff2");
   font-weight: 800;
 }
 @media screen and (max-width: 768px) {
@@ -30,10 +30,8 @@
 }
 
 body {
-  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", sans-serif;
   color: #333333;
-  font-family: myFirstFont;
-  font-weight: 400;
+  font-family: "myFirstFont";
 }
 
 .inner {
@@ -1252,12 +1250,7 @@ body {
 }
 @media screen and (max-width: 768px) {
   .reason-bottomList {
-    margin-top: 120px;
-  }
-}
-@media screen and (max-width: 600px) {
-  .reason-bottomList {
-    margin-top: 20vw;
+    display: none;
   }
 }
 .reason-bottomList li {
@@ -1626,7 +1619,7 @@ body {
 }
 
 .step {
-  padding-top: 350px;
+  padding-top: 25vw;
   padding-bottom: 125px;
   margin-top: -1px;
   background: url(../img/step-bg.png) no-repeat top center/cover;
@@ -2372,9 +2365,8 @@ body {
     padding-bottom: max(40px, 8.3333333333vw);
   }
 }
-.cta02 span {
+.cta02 .cta-text {
   color: #08bf5a;
-  font-weight: 600;
 }
 
 .plan {
@@ -2412,20 +2404,30 @@ body {
 }
 
 .attention-list {
-  margin-top: 40px;
+  margin-top: 25px;
 }
 @media screen and (max-width: 768px) {
   .attention-list {
-    margin-top: 30px;
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .attention-list {
+    margin-top: 15px;
   }
 }
 .attention-list li {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: normal;
 }
 @media screen and (max-width: 768px) {
   .attention-list li {
     font-size: 16px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .attention-list li {
+    font-size: 13px;
   }
 }
 .attention-list li:not(:first-child) {
@@ -2558,9 +2560,8 @@ body {
     padding: 13.3333333333vw 0 16.6666666667vw;
   }
 }
-.cta03 span {
+.cta03 .cta-text {
   color: #08bf5a;
-  font-weight: 600;
 }
 
 .comparison {

@@ -23,20 +23,20 @@ $breakpoints: (
 
 //フォント
 @font-face {
-  font-family: myFirstFont;
-  src: url(../font/genshinMedium.woff2);
+  font-family: 'myFirstFont';
+  src: url(../font/genshinMedium.woff2) format('woff2');
   font-weight: 400;
 }
 
 @font-face {
-  font-family: myFirstFont;
-  src: url(../font/genshinBold.woff2);
+  font-family: 'myFirstFont';
+  src: url(../font/genshinBold.woff2) format('woff2');
   font-weight: 600;
 }
 
 @font-face {
-  font-family: myFirstFont;
-  src: url(../font/genshinHeavy.woff2);
+  font-family: 'myFirstFont';
+  src: url(../font/genshinHeavy.woff2) format('woff2');
   font-weight: 800;
 }
 
@@ -54,10 +54,9 @@ $breakpoints: (
 }
 
 body {
-  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", sans-serif;
+  // font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", sans-serif;
   color: #333333;
-  font-family: myFirstFont;
-  font-weight: 400;
+  font-family: 'myFirstFont';
 }
 
 .inner {
@@ -1099,10 +1098,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 .reason-bottomList {
   margin-top: 90px;
   @include mq(md) {
-    margin-top: 120px;
-  }
-  @include mq(sm) {
-    margin-top: Vw(120, 600);
+    display: none;
   }
 
   li {
@@ -1434,7 +1430,7 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 }
 
 .step {
-  padding-top: 350px;
+  padding-top: 25vw;
   padding-bottom: 125px;
   margin-top: -1px;
   background: url(../img/step-bg.png) no-repeat top center / cover;
@@ -2117,9 +2113,8 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
     padding-bottom: max(40px, Vw(50, 600));
   }
 
-  span {
+  .cta-text {
     color: #08bf5a;
-    font-weight: 600;
   }
 }
 
@@ -2150,16 +2145,22 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
 }
 
 .attention-list {
-  margin-top: 40px;
+  margin-top: 25px;
   @include mq(md) {
-    margin-top: 30px;
+    margin-top: 20px;
+  }
+  @include mq(sm) {
+    margin-top: 15px;
   }
 
   li {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: normal;
     @include mq(md) {
       font-size: 16px;
+    }
+    @include mq(sm) {
+      font-size: 13px;
     }
 
     &:not(:first-child) {
@@ -2265,9 +2266,8 @@ $reason-spList: 1 reason01, 2 reason02, 3 reason03;
     padding: Vw(80, 600) 0 Vw(100, 600);
   }
 
-  span {
+  .cta-text {
     color: #08bf5a;
-    font-weight: 600;
   }
 }
 
